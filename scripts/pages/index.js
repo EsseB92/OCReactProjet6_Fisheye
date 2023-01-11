@@ -3,8 +3,8 @@
         // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
         let url = '../../data/photographers.json';
         let response = await fetch(url);
-        let all = await response.json();
-        let photographers = all.photographers;
+        let alljson = await response.json();
+        let photographers = alljson.photographers;
         console.log(photographers);
         // et bien retourner le tableau photographers seulement une fois récupéré
         return ({
