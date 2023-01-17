@@ -5,8 +5,8 @@ body {
     margin: 0;
 }
 
-
-header {
+/* HEADER */
+.header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -14,58 +14,74 @@ header {
     height: 90px;
 }
 
-h1 {
-    color: #901C1C;
-    margin-right: 100px;
+.header__link{
+
 }
 
-.logo {
+.header__logo {
     height: 50px;
     margin-left: 100px;
 }
 
-.photographer_section {
+.header__title {
+    color: #901C1C;
+    margin-right: 100px;
+}
+
+/* CARDS */
+.cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
 }
 
-.photographer_section article {
+.card {
     justify-self: center;
+
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
-.photographer_section article img {
+.card__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-decoration: none;
+}
+
+.card__image {
     height: 200px;
     width: 200px;
     border-radius: 100px;
+
     object-fit: cover;
+    
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.photographer_section article h2 {
+.card__title {
     color: #D3573C;
     font-size: 36px;
-    line-height: 47px;
     margin: 20px 0 0 0;
 }
 
-.photographer_section article .location {
+.card__location {
     color: #901C1C;
     font-size: 13px;
     margin: 0 0 3px 0;
 }
 
-.photographer_section article .tagline {
+.card__tagline {
+    color: #000000;
     font-size: 10px;
     margin: 0 0 3px 0;
 }
 
-.photographer_section article .price {
+.card__price {
     color: #757575;
     font-size: 9px;
     margin: 0;
