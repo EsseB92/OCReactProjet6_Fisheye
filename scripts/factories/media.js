@@ -9,23 +9,45 @@ function mediaFactory(data) {
         const article = document.createElement( 'article' );
         article.setAttribute("class", "media")
 
-        //<img class="medias__image"></img>
+        //<img class="media__image"></img>
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
         img.setAttribute("alt", title)
         img.setAttribute("class", "media__image")
+        img.setAttribute("onclick", "displayLightBox(" + id + ")")
 
-        //<footer class="medias__footer"></footer>
+        //<footer class="media__footer"></footer>
         const footer = document.createElement( 'footer' );
         footer.setAttribute("class", "media__footer")
         
-        //<h2 class="medias__title"></h2>
+        //<div class="media__title-container"></div>
+        const div_title = document.createElement( 'div' );
+        div_title.setAttribute("class", "media__title-container")
+        
+        //<h2 class="media__title"></h2>
         const h2 = document.createElement( 'h2' );
         h2.textContent = title
         h2.setAttribute("class", "media__title")
 
+        //<div class="media__likes"></div>
+        const div_like = document.createElement( 'div' );
+        div_like.setAttribute("class", "media__likes")
+
+        //<p class="media__like"></p>
+        const p = document.createElement( 'p' );
+        p.textContent = likes
+        p.setAttribute("class", "media__like")
+
+        //<i class="fa-solid fa-heart media__heart"></i>
+        const i = document.createElement( 'i' );
+        i.setAttribute("class", "fa-solid fa-heart media__heart")
+
         article.appendChild(img)
-        footer.appendChild(h2)
+        div_title.appendChild(h2)
+        div_like.appendChild(p)
+        div_like.appendChild(i)
+        footer.appendChild(div_title)
+        footer.appendChild(div_like)
         article.appendChild(footer)
         return article
     }
@@ -35,32 +57,74 @@ function mediaFactory(data) {
         const article = document.createElement( 'article' );
         article.setAttribute("class", "media")
 
-        //<video class="medias__image"></video>
+        //<video class="media__video"></video>
         const video = document.createElement( 'video' );
-        video.setAttribute("controls", "")
+        // video.setAttribute("controls", "")
         video.setAttribute("class", "media__video")
+        video.setAttribute("src", movie)
+        video.setAttribute("onclick", "displayLightBox(" + id + ")")
 
-        //<source class="medias__image"></source>
-        const source = document.createElement( 'source' );
-        source.setAttribute("src", movie)
-        source.setAttribute("type", "video/mp4")
-        source.setAttribute("class", "media__source")
+        // //<source class="media__source"></source>
+        // const source = document.createElement( 'source' );
+        // source.setAttribute("src", movie)
+        // source.setAttribute("type", "video/mp4")
+        // source.setAttribute("class", "media__source")
 
-        //<footer class="medias__footer"></footer>
+        //<footer class="media__footer"></footer>
         const footer = document.createElement( 'footer' );
         footer.setAttribute("class", "media__footer")
+
+        //<div class="media__title-container"></div>
+        const div_title = document.createElement( 'div' );
+        div_title.setAttribute("class", "media__title-container")
         
-        //<h2 class="medias__title"></h2>
+        //<h2 class="media__title"></h2>
         const h2 = document.createElement( 'h2' );
         h2.textContent = title
         h2.setAttribute("class", "media__title")
 
-        video.appendChild(source)
+        //<div class="media__likes"></div>
+        const div_like = document.createElement( 'div' );
+        div_like.setAttribute("class", "media__likes")
+
+        //<p class="media__like"></p>
+        const p = document.createElement( 'p' );
+        p.textContent = likes
+        p.setAttribute("class", "media__like")
+
+        //<i class="fa-solid fa-heart media__heart"></i>
+        const i = document.createElement( 'i' );
+        i.setAttribute("class", "fa-solid fa-heart media__heart")
+
+        //video.appendChild(source)
         article.appendChild(video)
-        footer.appendChild(h2)
+        div_title.appendChild(h2)
+        div_like.appendChild(p)
+        div_like.appendChild(i)
+        footer.appendChild(div_title)
+        footer.appendChild(div_like)
         article.appendChild(footer)
         return article
     }
 
-    return { id, photographerId, title, image, video, likes, date, price, getImageCardDOM, getVideoCardDOM }
+    function getImageLightBoxDOM() {
+        //<img class="lightbox__image"></img>
+        const img = document.createElement( 'img' );
+        img.setAttribute("src", picture)
+        img.setAttribute("alt", title)
+        img.setAttribute("class", "lightbox__image")
+
+        //<h2 class="lightbox__title"></h2>
+        const h2 = document.createElement( 'h2' );
+        h2.textContent = title
+        h2.setAttribute("class", "lightbox__title")
+
+        return [img, h2]
+    }
+
+    function getVideoLightBoxDOM() {
+
+    }
+
+    return { id, photographerId, title, image, video, likes, date, price, getImageCardDOM, getVideoCardDOM, getImageLightBoxDOM, getVideoLightBoxDOM }
 }

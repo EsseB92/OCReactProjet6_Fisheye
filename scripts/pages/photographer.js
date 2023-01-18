@@ -2,14 +2,13 @@
 
 let searchParams = new URLSearchParams(location.search);
 let photographerId = searchParams.get('id');
-let photographer
-let medias
+var p, m;
 
 async function getPhotographer() {
     try {
         const response = await fetch('./data/photographers.json')
         const data = await response.json();
-        photographer = data.photographers.find((photographer) => photographer.id == photographerId)
+        let photographer = data.photographers.find((photographer) => photographer.id == photographerId)
         return photographer
     }
     catch (e) {
@@ -21,7 +20,7 @@ async function getMedias() {
     try {
         const response = await fetch('./data/photographers.json')
         const data = await response.json();
-        medias = data.media.filter((media) => media.photographerId == photographerId)
+        let medias = data.media.filter((media) => media.photographerId == photographerId)
         return medias
     }
     catch (e) {
@@ -32,25 +31,26 @@ async function getMedias() {
 
 function displayPhotographer(photographer) {
     const photographerSection = document.querySelector(".photographer");
+    const sidebarSection = document.querySelector(".sidebar__rates");
+    const titleModal = document.querySelector(".modal__title");
 
     const photographerModel = photographerFactory(photographer);
     const userHeaderDOM = photographerModel.getUserHeaderDOM();
-    const [header, button, image] = userHeaderDOM;
+    const [header, button, image, rate] = userHeaderDOM;
     photographerSection.appendChild(header);
     photographerSection.appendChild(button);
     photographerSection.appendChild(image);
-
-//     medias.forEach((media) => {
-//         const mediaModel = mediaFactory(media);
-//         const mediaCardDOM = mediaModel.getMediaCardDOM();
-//         mediasSection.appendChild(mediaCardDOM);
-//     });
+    
+    sidebarSection.appendChild(rate);
+    titleModal.textContent = "Contacter " + photographerModel.name
 };
 
 function displayMedias(medias) {
     const mediasSection = document.querySelector(".medias");
-    
+    const sidebarSection = document.querySelector(".sidebar__like");
 
+    let countMedia = 0;
+    
     medias.forEach((media) => {
         let mediaCardDOM;
         const mediaModel = mediaFactory(media);
@@ -63,7 +63,10 @@ function displayMedias(medias) {
             console.log("Erreur d'extension de fichier !")
         }
         mediasSection.appendChild(mediaCardDOM);
+        countMedia += media.likes
     });
+    
+    sidebarSection.textContent = countMedia;
 };
 
 function getTypeOfMedia(media) {
@@ -76,16 +79,41 @@ function getTypeOfMedia(media) {
     }else return 0
 }
 
+function displayMediaByLightBox(id) {
+    const mediaDOM = document.querySelectorAll('.media__image,.media__video')
+    const lightboxDOM = document.querySelector('#lightbox')
+    const lightboxContainer = document.querySelector(".lightbox__container");
+    
+    m.forEach((media) => {
+        if(media.id === id){
+            let mediaLightboxDOM;
+            const mediaModel = mediaFactory(media);
+            const type = getTypeOfMedia(media)
+            if(type === "image"){
+                mediaLightboxDOM = mediaModel.getImageLightBoxDOM();
+            }else if(type === "video"){
+                mediaLightboxDOM = mediaModel.getVideoLightBoxDOM();
+            }else{
+                console.log("Erreur d'extension de fichier !")
+            }
+            const [img, h2] = mediaLightboxDOM
 
+            console.log(h2)
+
+            lightboxContainer.appendChild(img)
+            lightboxContainer.appendChild(h2)
+        }
+    })
+}
 
 async function init() {
     // Récupère les datas du photographe
-    const [photographer, medias] = await Promise.all([getPhotographer(), getMedias()])
+    [p, m] = await Promise.all([getPhotographer(), getMedias()])
     //const [photographer, medias] = await getPhotographer();
     //const { medias } = await getMedias();
-    console.log(medias)
-    displayPhotographer(photographer); 
-    displayMedias(medias)
+    console.log(m)
+    displayPhotographer(p); 
+    displayMedias(m);
 };
     
 init();

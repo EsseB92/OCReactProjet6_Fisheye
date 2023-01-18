@@ -31,14 +31,13 @@ body {
 /* CARDS */
 .cards {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 70px;
     margin-top: 100px;
 }
 
 .card {
     justify-self: center;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,9 +53,9 @@ body {
 }
 
 .card__image {
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
+    height: 200px; /* 300 better */
+    width: 200px; /* 300 better */
+    border-radius: 100px; /* 150 */
 
     object-fit: cover;
     
@@ -86,3 +85,16 @@ body {
     font-size: 9px;
     margin: 0;
 }
+
+@media (max-width: 1050px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 690px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+

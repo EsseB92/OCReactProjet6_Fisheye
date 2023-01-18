@@ -3,6 +3,7 @@ function photographerFactory(data) {
 
     const picture = `./assets/photographers/${portrait}`;
     const location = `${city}, ${country}`;
+    const rate = `${price}€/jour`;
 
     function getUserCardDOM() {
         //<article class="cards__item card"></article>
@@ -40,7 +41,7 @@ function photographerFactory(data) {
 
         //<p class="card__price"></p>
         const p_price = document.createElement( 'p' );
-        p_price.textContent = price + "€/jour";
+        p_price.textContent = rate;
         p_price.setAttribute("class", "card__price")
 
         // Ajout dans <article>
@@ -79,7 +80,7 @@ function photographerFactory(data) {
         //<button class="photographer__contact-button"></button>
         const button = document.createElement( 'button' );
         button.textContent = "Contactez-moi";
-        button.setAttribute("class", "photographer__contact-button");
+        button.setAttribute("class", "contact_button photographer_-button");
         button.setAttribute("onclick", "displayModal()");
 
         //<img src="./assets/photographers/....jpg" class="card__image" alt="Photo de profil de ..."/>
@@ -88,12 +89,17 @@ function photographerFactory(data) {
         img.setAttribute("class", "photographer__image card__image")
         img.setAttribute("alt", "Photo de profil de " + name)
 
+        //<p class="sidebar__rate"></p>
+        const p_rate = document.createElement( 'p' );
+        p_rate.textContent = rate;
+        p_rate.setAttribute("class", "sidebar__rate")
+
         // Ajout dans <article>
         
         div_header.appendChild(h1);
         div_header.appendChild(p_location);
         div_header.appendChild(p_tagline);
-        return [div_header, button, img];
+        return [div_header, button, img, p_rate];
     }
 
     return { name, id, city, country, tagline, price, picture, getUserCardDOM, getUserHeaderDOM }

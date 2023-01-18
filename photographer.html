@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe</title>
+    <script src="https://kit.fontawesome.com/34d16a3229.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -18,27 +19,56 @@
     <main class="main" role="main" aria-label="Contenu pricipale de la page">
       <section class="photographer"></section>
       <section class="medias"></section>
+      <section class="sidebar">
+        <div class="sidebar__likes">
+          <p class="sidebar__like"></p>
+          <i class="fa-solid fa-heart sidebar__heart"></i>
+        </div>
+        <div class="sidebar__rates"></div>
+      </section>
     </main>
 
     <div id="contact_modal">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="./assets/icons/close.svg" onclick="closeModal()" />
+				<header class="modal__header">
+          <h2 class="modal__title">Contacter</h2>
+          <img class="modal__close" src="assets/icons/close.svg" alt="Fermer" onclick="closeModal()" />
         </header>
 
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
+				<form id="form" onsubmit="dataProcess(event)">
+					<div class="form__data data">
+						<label for="firstname" class="data__label">Prénom</label>
+						<input type="text" id="firstname" name="firstname" class="data__input"/>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <div class="data">
+						<label for="lastname" class="data__label">Nom</label>
+						<input type="text" id="lastname" name="lastname" class="data__input"/>
+					</div>
+          <div class="data">
+						<label for="email" class="data__label">@mail</label>
+						<input type="email" id="email" name="email" class="data__input"/>
+					</div>
+          <div class="data">
+						<label for="message" class="data__label">Votre message</label>
+						<textarea type="text" id="message" name="message" class="data__input"></textarea>
+					</div>
+          <button class="contact_button form__button">Envoyer</button>
 				</form>
 			</div>
 		</div>
+
+    <dialog id="lightbox">
+      <i id="prev-media" class="fa-sharp fa-solid fa-chevron-left" onclick="changeMedia('prev')"></i>
+      <i id="next-media" class="fa-sharp fa-solid fa-chevron-right" onclick="changeMedia('next')"></i>
+      <i id="close-lightbox" class="fa-sharp fa-solid fa-xmark" onclick="closeLightBox()"></i>
+      <div class="lightbox__container"></div>
+    </dialog>
+
+
     <script src="./scripts/factories/photographer.js"></script>
     <script src="./scripts/factories/media.js"></script>
     <script src="./scripts/pages/photographer.js"></script>
     <script src="./scripts/utils/contactForm.js"></script>
+    <script src="./scripts/utils/lightBox.js"></script>
   </body>
 </html>
