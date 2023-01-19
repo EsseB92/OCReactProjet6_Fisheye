@@ -31,4 +31,10 @@ function closeLightBox() {
 
 	lightBox.style.display = "none";
     lightboxContainer.innerHTML = "";
+
+    const medias = document.getElementsByClassName("media__media")
+    
+    for(let element of medias) {
+        element.setAttribute("tabindex", 0)
+    };
 }

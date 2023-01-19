@@ -11,6 +11,10 @@ function displayModal() {
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
+    const medias = document.getElementsByClassName("media__media")
+    for(let element of medias) {
+        element.setAttribute("tabindex", 0)
+    };
 }
 
 function dataProcess(event) {

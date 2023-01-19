@@ -105,6 +105,10 @@ function displayMediaByLightBox(id) {
             lightboxDOM.appendChild(next)
             lightboxDOM.appendChild(close)
             lightboxDOM.appendChild(div)
+            const medias = document.getElementsByClassName("media__media")
+            for(let element of medias) {
+                element.setAttribute("tabindex", -1)
+            };
         }
     })
 }
