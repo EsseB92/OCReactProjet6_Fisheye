@@ -80,8 +80,10 @@ function photographerFactory(data) {
         //<button class="photographer__contact-button"></button>
         const button = document.createElement( 'button' );
         button.textContent = "Contactez-moi";
-        button.setAttribute("class", "contact_button photographer_-button");
-        button.setAttribute("onclick", "displayModal()");
+        button.setAttribute("title", "Me contacter")
+        button.setAttribute("class", "contact_button photographer__button")
+        button.setAttribute("onclick", "displayModal()")
+        button.setAttribute("tabindex", 0)
 
         //<img src="./assets/photographers/....jpg" class="card__image" alt="Photo de profil de ..."/>
         const img = document.createElement( 'img' );

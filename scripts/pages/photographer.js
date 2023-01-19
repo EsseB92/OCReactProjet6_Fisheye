@@ -105,8 +105,9 @@ function displayMediaByLightBox(id) {
             lightboxDOM.appendChild(next)
             lightboxDOM.appendChild(close)
             lightboxDOM.appendChild(div)
-            const medias = document.getElementsByClassName("media__media")
-            for(let element of medias) {
+
+            const tabIndex = document.querySelectorAll('[tabindex]');
+            for(let element of tabIndex) {
                 element.setAttribute("tabindex", -1)
             };
         }

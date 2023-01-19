@@ -1,8 +1,8 @@
 function displayModal() {
     const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
-    const medias = document.getElementsByClassName("media__media")
-    for(let element of medias) {
+    const tabIndex = document.querySelectorAll('[tabindex]');
+    for(let element of tabIndex) {
         element.setAttribute("tabindex", -1)
     };
     
@@ -11,8 +11,8 @@ function displayModal() {
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
-    const medias = document.getElementsByClassName("media__media")
-    for(let element of medias) {
+    const tabIndex = document.querySelectorAll('[tabindex]');
+    for(let element of tabIndex) {
         element.setAttribute("tabindex", 0)
     };
 }
