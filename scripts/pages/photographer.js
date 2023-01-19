@@ -79,10 +79,11 @@ function getTypeOfMedia(media) {
     }else return 0
 }
 
+/* Lightbox */
+
 function displayMediaByLightBox(id) {
     const mediaDOM = document.querySelectorAll('.media__image,.media__video')
-    const lightboxDOM = document.querySelector('#lightbox')
-    const lightboxContainer = document.querySelector(".lightbox__container");
+    const lightboxDOM = document.getElementById('lightbox')
     
     m.forEach((media) => {
         if(media.id === id){
@@ -96,15 +97,55 @@ function displayMediaByLightBox(id) {
             }else{
                 console.log("Erreur d'extension de fichier !")
             }
-            const [img, h2] = mediaLightboxDOM
 
-            console.log(h2)
-
-            lightboxContainer.appendChild(img)
-            lightboxContainer.appendChild(h2)
+            const [prev, next, close, div] = mediaLightboxDOM
+            lightboxDOM.innerText = "";
+            console.log(lightboxDOM)
+            lightboxDOM.append(prev)
+            lightboxDOM.appendChild(next)
+            lightboxDOM.appendChild(close)
+            lightboxDOM.appendChild(div)
         }
     })
 }
+
+function nextMedia(id){
+    var count = 0;
+
+    if(m.slice(-1)[0].id === id){
+        displayMediaByLightBox(m.slice(0)[0].id)
+    }
+
+    m.forEach((media) => {
+        if(count === 1){
+            count = 0;
+
+            displayMediaByLightBox(media.id);
+        }else if(media.id === id){
+            count = 1;
+        }
+    })
+}
+
+function prevMedia(id){
+    var count = -1;
+
+    if(m.slice(0)[0].id === id){
+        displayMediaByLightBox(m.slice(-1)[0].id)
+    }
+
+    m.forEach((media) => {
+        count++;
+        if(media.id === id){
+            displayMediaByLightBox(m.slice(count-1)[0].id)
+        }
+    })
+}
+
+
+
+
+/* INIT */
 
 async function init() {
     // Récupère les datas du photographe

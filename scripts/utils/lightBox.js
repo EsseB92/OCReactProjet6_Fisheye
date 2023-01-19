@@ -1,19 +1,28 @@
+const lightbox = document.getElementById('lightbox')
+
+document.addEventListener('keyup', (event) => {
+    if(event.code === 'ArrowLeft') {
+        prevMedia(parseInt(document.querySelector('.lightbox__media').getAttribute('id')))
+    }
+    if(event.code === 'ArrowRight') {
+        nextMedia(parseInt(document.querySelector('.lightbox__media').getAttribute('id')))
+    }
+    if(event.code === 'Escape') {
+        closeLightBox()
+    }
+})
+
 function displayLightBox(id) {
     displayMediaByLightBox(id);
     const lightBox = document.getElementById("lightbox");
 	lightBox.style.display = "block";
 }
 
-function changeMedia(text) {
-    if(text === 'prev'){
-        console.log("Previous")
-    }else if(text === 'next'){
-        console.log("Next")
-    }else {
-        console.log("Erreur : click non reconnu")
+function onKeyUp(event, id) {
+    if(event.key === "Enter"){
+        console.log("entrée")
+        displayLightBox(id);
     }
-
-    
 }
 
 function closeLightBox() {
