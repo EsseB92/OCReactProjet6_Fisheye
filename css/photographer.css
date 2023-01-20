@@ -80,11 +80,8 @@
     font-family: "DM Sans", sans-serif;
     padding: 5px;
     border-radius: 5px;
+    cursor: pointer;
 }
-
-
-
-
 
 .medias {
     display: flex;
@@ -99,6 +96,10 @@
 .media {
     display: flex;
     flex-direction: column;
+}
+
+.media__media {
+    cursor: pointer;
 }
 
 .media__image {
@@ -149,6 +150,7 @@
 
 .media__heart {
     font-size: 18px;
+    cursor: pointer;
 }
 
 .sidebar {

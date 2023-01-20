@@ -7,6 +7,7 @@ document.addEventListener('keyup', (event) => {
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     const main = document.getElementById("main");
+
 	modal.style.display = "block";
     modal.setAttribute("aria-hidden", "false")
     main.setAttribute("aria-hidden", "true")

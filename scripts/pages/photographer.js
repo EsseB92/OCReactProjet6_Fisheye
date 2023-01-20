@@ -43,6 +43,7 @@ function displayPhotographer() {
     photographerSection.appendChild(image);
     
     sidebarSection.appendChild(rate);
+    console.log(photographerModel);
     titleModal.textContent = "Contacter " + photographerModel.name;
 };
 

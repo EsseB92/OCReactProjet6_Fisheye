@@ -96,6 +96,6 @@ function photographerFactory(data) {
         return [div_header, button, img, p_rate];
     }
 
-    return { getUserCardDOM, getUserHeaderDOM }
+    return { name, getUserCardDOM, getUserHeaderDOM }
 }
 
