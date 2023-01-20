@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-@media (max-width: 990px) {
+@media (max-width: 1190px) {
     .photographer {
         grid-template-columns: 1fr;
         height: auto;

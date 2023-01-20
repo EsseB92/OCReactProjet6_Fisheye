@@ -33,16 +33,19 @@ function photographerFactory(data) {
         const p_location = document.createElement( 'p' );
         p_location.textContent = location;
         p_location.setAttribute("class", "card__location")
+        p_location.setAttribute("aria-label", "Localisation : " + location)
 
         //<p class="card__tagline"></p>
         const p_tagline = document.createElement( 'p' );
         p_tagline.textContent = tagline;
         p_tagline.setAttribute("class", "card__tagline")
+        p_tagline.setAttribute("aria-label", "Devise : " + tagline)
 
         //<p class="card__price"></p>
         const p_price = document.createElement( 'p' );
         p_price.textContent = rate;
         p_price.setAttribute("class", "card__price")
+        p_price.setAttribute("aria-label", "Tarif : " + rate)
 
         // Ajout dans <article>
         a_link.appendChild(img);
