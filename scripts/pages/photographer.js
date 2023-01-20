@@ -1,44 +1,39 @@
-//Mettre le code JavaScript lié à la page photographer.html
-
-let searchParams = new URLSearchParams(location.search);
-let photographerId = searchParams.get('id');
+const SEARCHPARAMS = new URLSearchParams(location.search);
+const PHOTOGRAPHERID = SEARCHPARAMS.get('id');
 var p, m;
-var idOfAlreadyAdded = []
+var idOfAlreadyAdded = [];
 
 /* Async Get */
 
-async function getPhotographer() {
+async function getData(path) {
     try {
-        const response = await fetch('./data/photographers.json')
+        const response = await fetch(path);
         const data = await response.json();
-        let photographer = data.photographers.find((photographer) => photographer.id == photographerId)
-        return photographer
-    }
-    catch (e) {
-        console.log
+        return data;
+    } catch (e) {
+        console.log(e);
     }
 }
 
+async function getPhotographer() {
+    const data = await getData('./data/photographers.json');
+    const photographer = data.photographers.find((photographer) => photographer.id == PHOTOGRAPHERID);
+    return photographer;
+    
+}
+
 async function getMedias() {
-    try {
-        const response = await fetch('./data/photographers.json')
-        const data = await response.json();
-        let medias = data.media.filter((media) => media.photographerId == photographerId)
-        return medias
-    }
-    catch (e) {
-        console.log(e);
-    }
+    const data = await getData('./data/photographers.json');
+    const medias = data.media.filter((media) => media.photographerId == PHOTOGRAPHERID);
+    return medias;
 }
 
 /* Get type of media */
 
 function getTypeOfMedia(media) {
     if(media.image !== undefined){
-        console.log("image")
         return "image"
     } else if(media.video !== undefined){
-        console.log("video")
         return "video"
     }else return 0
 }
@@ -88,15 +83,13 @@ function displayMedias(medias) {
 
 function addOneLike(id) {
 
-    const article = document.getElementById(id)
+    const article = document.getElementById(id);
     const like = article.querySelector('.media__like')
     const allLikes = document.querySelector('.sidebar__like')
 
     const media = m.find(element => element.id === parseInt(id))
 
-    const test = idOfAlreadyAdded.find(element => element === id)
-
-    if(test === undefined){
+    if(!idOfAlreadyAdded.includes(id)){
         like.textContent = media.likes + 1
         allLikes.textContent = parseInt(allLikes.innerText)+1
 
@@ -109,25 +102,21 @@ function addOneLike(id) {
 /* Sort */
 
 function orderMedias() {
-    const valueSelected = document.getElementById("sort-selection").value
+    const valueSelected = document.getElementById("sort-selection").value;
     switch (valueSelected) {
         case 'popularity':
-            m.sort((a, b) => b.likes - a.likes)
-            displayMedias(m)
-        break;
+            m.sort((a, b) => b.likes - a.likes);
+            break;
         case 'date':
-            m.sort((a, b) => new Date(b.date) - new Date(a.date))
-            console.log(m)
-            displayMedias(m)
-        break;
+            m.sort((a, b) => new Date(b.date) - new Date(a.date));
+            break;
         case 'title':
-            m.sort((a, b) => ('' + a.title).localeCompare(b.title))
-            console.log(m)
-            displayMedias(m)
-        break;
+            m.sort((a, b) => ('' + a.title).localeCompare(b.title));
+            break;
         default :
-            m.sort((a, b) => b.likes - a.likes)
+            break;
     }
+    displayMedias(m);
 }
 
 /* Lightbox */
@@ -151,7 +140,7 @@ function displayMediaByLightBox(id) {
 
             const [prev, next, close, div] = mediaLightboxDOM
             lightboxDOM.innerText = "";
-            console.log(lightboxDOM)
+            
             lightboxDOM.append(prev)
             lightboxDOM.appendChild(next)
             lightboxDOM.appendChild(close)
@@ -196,11 +185,9 @@ function prevMedia(id){
 /* INIT */
 
 async function init() {
-    // Récupère les datas du photographe
+    
     [p, m] = await Promise.all([getPhotographer(), getMedias()])
-    //const [photographer, medias] = await getPhotographer();
-    //const { medias } = await getMedias();
-    console.log(m)
+    
     displayPhotographer(p);
     orderMedias();
     displayMedias(m);

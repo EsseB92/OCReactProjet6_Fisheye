@@ -1,223 +1,161 @@
 function mediaFactory(data) {
     const { id, photographerId, title, image, video, likes, date, price } = data;
 
-    const picture = `./assets/photographers/medias/${image}`;
-    const movie = `./assets/photographers/medias/${video}`;
+    const IMG_SRC = `./assets/photographers/medias/${image}`;
+    const MOVIE_SRC = `./assets/photographers/medias/${video}`;
+    const IMG_ARIA_DESC = `description-${id}`;
+    const IMG_ARIA = "Cliquer ou appuyer sur Entrée pour voir l'image en plein écran";
+    const MOVIE_ARIA = "Cliquer ou appuyer sur Entrée pour voir la vidéo en plein écran";
+    const I_ARIA_LIKE = "Cliquer pour ajouter un like";
+
+    function mediaCardDOM() {
+        const footer = document.createElement( 'footer' );
+        footer.classList.add("media__footer");
+        
+        const div_title = document.createElement( 'div' );
+        div_title.classList.add("media__title-container");
+        
+        const h2 = document.createElement( 'h2' );
+        h2.textContent = title;
+        h2.classList.add("media__title");
+        h2.id = IMG_ARIA_DESC;
+
+        const div_like = document.createElement( 'div' );
+        div_like.classList.add("media__likes");
+
+        const p = document.createElement( 'p' );
+        p.textContent = likes;
+        p.classList.add("media__like");
+
+        const i = document.createElement( 'i' );
+        i.classList.add("fa-solid", "fa-heart", "media__heart");
+        i.onclick = () => addOneLike(id);
+        i.setAttribute("aria-label", I_ARIA_LIKE);
+        i.tabIndex = 0;
+
+        div_title.appendChild(h2);
+        div_like.appendChild(p);
+        div_like.appendChild(i);
+        footer.appendChild(div_title);
+        footer.appendChild(div_like);
+        
+
+        return footer;
+    }
 
     function getImageCardDOM() {
-        //<article class="media"></article>
+        const footer = mediaCardDOM();
+
         const article = document.createElement( 'article' );
-        article.setAttribute("class", "media")
-        article.setAttribute("id", id)
+        article.classList.add("media");
+        article.id = id;
 
-        //<img class="media__image"></img>
         const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        img.setAttribute("alt", title)
-        img.setAttribute("class", "media__image media__media")
-        img.setAttribute("onclick", "displayLightBox(" + id + ")")
-        img.setAttribute("onkeyup", "onKeyUp(event, " + id + ")")
-        img.setAttribute("tabindex", "0")
-        img.setAttribute("aria-label", "Cliquer ou appuyer sur Entrée pour voir l'image en plein écran")
-        img.setAttribute("aria-describedby", "description-"+id)
+        img.src = IMG_SRC;
+        img.alt = title;
+        img.classList.add("media__image", "media__media");
+        img.onclick = () => displayLightBox(id);
+        img.onkeyup = event => onKeyUp(event, id);
+        img.tabindex = 0;
+        img.setAttribute("aria-label", IMG_ARIA);
+        img.setAttribute("aria-describedby", IMG_ARIA_DESC);
 
-        //<footer class="media__footer"></footer>
-        const footer = document.createElement( 'footer' );
-        footer.setAttribute("class", "media__footer")
-        
-        //<div class="media__title-container"></div>
-        const div_title = document.createElement( 'div' );
-        div_title.setAttribute("class", "media__title-container")
-        
-        //<h2 class="media__title"></h2>
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = title
-        h2.setAttribute("class", "media__title")
-        h2.setAttribute("id", "description-"+id)
+        article.appendChild(img);
+        article.appendChild(footer);
 
-        //<div class="media__likes"></div>
-        const div_like = document.createElement( 'div' );
-        div_like.setAttribute("class", "media__likes")
-
-        //<p class="media__like"></p>
-        const p = document.createElement( 'p' );
-        p.textContent = likes
-        p.setAttribute("class", "media__like")
-
-        //<i class="fa-solid fa-heart media__heart"></i>
-        const i = document.createElement( 'i' );
-        i.setAttribute("class", "fa-solid fa-heart media__heart")
-        i.setAttribute("onclick", "addOneLike(" + id + ")")
-        i.setAttribute("aria-label", "Cliquer pour ajouter un like")
-        i.setAttribute("tabIndex", "0")
-
-        article.appendChild(img)
-        div_title.appendChild(h2)
-        div_like.appendChild(p)
-        div_like.appendChild(i)
-        footer.appendChild(div_title)
-        footer.appendChild(div_like)
-        article.appendChild(footer)
-        return article
+        return article;
     }
 
     function getVideoCardDOM() {
-        //<article class="media"></article>
+        const footer = mediaCardDOM();
+
         const article = document.createElement( 'article' );
-        article.setAttribute("class", "media")
-        article.setAttribute("id", id)
+        article.classList.add("media");
+        article.id = id;
 
-        //<video class="media__video"></video>
         const video = document.createElement( 'video' );
-        // video.setAttribute("controls", "")
-        video.setAttribute("class", "media__video media__media")
-        video.setAttribute("src", movie)
-        video.setAttribute("onclick", "displayLightBox(" + id + ")")
-        video.setAttribute("onkeyup", "onKeyUp(event, " + id + ")")
-        video.setAttribute("tabindex", "0")
-        video.setAttribute("aria-label", "Cliquer ou appuyer sur Entrée pour voir la vidéo en plein écran")
-        video.setAttribute("aria-describedby", "description-"+id)
+        video.src = MOVIE_SRC;
+        video.classList.add("media__video", "media__media");
+        video.onclick = () => displayLightBox(id);
+        video.onkeyup = event => onKeyUp(event, id);
+        video.tabindex = 0;
+        video.setAttribute("aria-label", MOVIE_ARIA);
+        video.setAttribute("aria-describedby", IMG_ARIA_DESC);
 
-        //<footer class="media__footer"></footer>
-        const footer = document.createElement( 'footer' );
-        footer.setAttribute("class", "media__footer")
+        article.appendChild(video);
+        article.appendChild(footer);
 
-        //<div class="media__title-container"></div>
-        const div_title = document.createElement( 'div' );
-        div_title.setAttribute("class", "media__title-container")
-        
-        //<h2 class="media__title"></h2>
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = title
-        h2.setAttribute("class", "media__title")
-        h2.setAttribute("id", "description-"+id)
-
-        //<div class="media__likes"></div>
-        const div_like = document.createElement( 'div' );
-        div_like.setAttribute("class", "media__likes")
-
-        //<p class="media__like"></p>
-        const p = document.createElement( 'p' );
-        p.textContent = likes
-        p.setAttribute("class", "media__like")
-
-        //<i class="fa-solid fa-heart media__heart"></i>
-        const i = document.createElement( 'i' );
-        i.setAttribute("class", "fa-solid fa-heart media__heart")
-        i.setAttribute("onclick", "addOneLike(" + id + ")")
-        i.setAttribute("aria-label", "Cliquer pour ajouter un like")
-        i.setAttribute("tabIndex", "0")
-
-        //video.appendChild(source)
-        article.appendChild(video)
-        div_title.appendChild(h2)
-        div_like.appendChild(p)
-        div_like.appendChild(i)
-        footer.appendChild(div_title)
-        footer.appendChild(div_like)
-        article.appendChild(footer)
         return article
     }
 
-    function getImageLightBoxDOM() {
-        //<i id="prev-media" class="fa-sharp fa-solid fa-chevron-left" onclick="prevMedia(${id})"></i>
+    /* For Lightbox */
+
+    function mediaLightBoxDOM() {
         const prev = document.createElement( 'i' );
-        prev.setAttribute("id", "prev-media")
-        prev.setAttribute("class", "fa-sharp fa-solid fa-chevron-left")
-        prev.setAttribute("onclick", "prevMedia(" + id + ")")
-        prev.setAttribute("aria-label", "Media précédent")
+        prev.id = "prev-media";
+        prev.classList.add("fa-sharp","fa-solid","fa-chevron-left");
+        prev.onclick = () => prevMedia(id);
+        prev.setAttribute("aria-label", "Media précédent");
 
-        //<i id="next-media" class="fa-sharp fa-solid fa-chevron-right" onclick="nextMedia(${id})"></i>
         const next = document.createElement( 'i' );
-        next.setAttribute("id", "next-media")
-        next.setAttribute("class", "fa-sharp fa-solid fa-chevron-right")
-        next.setAttribute("onclick", "nextMedia(" + id + ")")
-        next.setAttribute("aria-label", "Media suivant")
+        next.id = "next-media";
+        next.classList.add("fa-sharp","fa-solid","fa-chevron-right");
+        next.onclick = () => nextMedia(id);
+        next.setAttribute("aria-label", "Media suivant");
 
-        //<i id="close-lightbox" class="fa-sharp fa-solid fa-xmark" onclick="closeLightBox()"></i>
         const close = document.createElement( 'i' );
-        close.setAttribute("id", "close-lightbox")
-        close.setAttribute("class", "fa-sharp fa-solid fa-xmark")
-        close.setAttribute("onclick", "closeLightBox()")
-        next.setAttribute("aria-label", "Fermer")
+        close.id = "close-lightbox";
+        close.classList.add("fa-sharp","fa-solid","fa-xmark");
+        close.onclick = () => closeLightBox();
+        next.setAttribute("aria-label", "Fermer");
 
-        //<div class="lightbox__container"></div>
         const div = document.createElement( 'div' );
-        div.setAttribute("class", "lightbox__container")
+        div.classList.add("lightbox__container");
 
-        //<img class="lightbox__image"></img>
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        img.setAttribute("alt", title)
-        img.setAttribute("class", "lightbox__image lightbox__media")
-        img.setAttribute("id", id)
-        img.setAttribute("aria-describedby", "lightbox-description")
-
-        //<h2 class="lightbox__title"></h2>
         const h2 = document.createElement( 'h2' );
-        h2.textContent = title
-        h2.setAttribute("class", "lightbox__title")
-        h2.setAttribute("id", "lightbox-description")
+        h2.textContent = title;
+        h2.classList.add("lightbox__title");
+        h2.id = "lightbox-description";
 
-        div.appendChild(img)
-        div.appendChild(h2)
+        return [[prev, next, close], div, h2];
+    }
 
-        return [prev, next, close, div]
+    function getImageLightBoxDOM() {
+        const [controls, div, h2] =  mediaLightBoxDOM();
+
+        const img = document.createElement( 'img' );
+        img.src = IMG_SRC;
+        img.alt = title;
+        img.classList.add("lightbox__image", "lightbox__media");
+        img.id = id;
+        img.setAttribute("aria-describedby", "lightbox-description");
+
+        div.appendChild(img);
+        div.appendChild(h2);
+
+        return [...controls, div];
     }
 
     function getVideoLightBoxDOM() {
-        //<i id="prev-media" class="fa-sharp fa-solid fa-chevron-left" onclick="prevMedia(${id})"></i>
-        const prev = document.createElement( 'i' );
-        prev.setAttribute("id", "prev-media")
-        prev.setAttribute("class", "fa-sharp fa-solid fa-chevron-left")
-        prev.setAttribute("onclick", "prevMedia(" + id + ")")
-        prev.setAttribute("aria-label", "Media précédent")
+        const [controls, div, h2] =  mediaLightBoxDOM();
 
-        //<i id="next-media" class="fa-sharp fa-solid fa-chevron-right" onclick="nextMedia(${id})"></i>
-        const next = document.createElement( 'i' );
-        next.setAttribute("id", "next-media")
-        next.setAttribute("class", "fa-sharp fa-solid fa-chevron-right")
-        next.setAttribute("onclick", "nextMedia(" + id + ")")
-        next.setAttribute("aria-label", "Media suivant")
-
-        //<i id="close-lightbox" class="fa-sharp fa-solid fa-xmark" onclick="closeLightBox()"></i>
-        const close = document.createElement( 'i' );
-        close.setAttribute("id", "close-lightbox")
-        close.setAttribute("class", "fa-sharp fa-solid fa-xmark")
-        close.setAttribute("onclick", "closeLightBox()")
-        next.setAttribute("aria-label", "Fermer")
-
-        //<div class="lightbox__container"></div>
-        const div = document.createElement( 'div' );
-        div.setAttribute("class", "lightbox__container")
-
-        //<video class="media__video"></video>
         const video = document.createElement( 'video' );
-        video.setAttribute("controls", "")
-        video.setAttribute("class", "lightbox__video lightbox__media")
-        video.setAttribute("id", id)
-        video.setAttribute("aria-describedby", "lightbox-description")
+        video.controls = true;
+        video.classList.add("lightbox__video", "lightbox__media");
+        video.id = id;
+        video.setAttribute("aria-describedby", "lightbox-description");
 
-        //<source class="media__source"></source>
         const source = document.createElement( 'source' );
-        source.setAttribute("src", movie)
-        source.setAttribute("type", "video/mp4")
-        source.setAttribute("class", "lightbox__source")
+        source.src = MOVIE_SRC;
+        source.type = "video/mp4";
+        source.classList.add("lightbox__source");
 
+        video.appendChild(source);
+        div.appendChild(video);
+        div.appendChild(h2);
 
-        //<h2 class="lightbox__title"></h2>
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = title
-        h2.setAttribute("class", "lightbox__title")
-        h2.setAttribute("id", "lightbox-description")
-
-
-        video.appendChild(source)
-        div.appendChild(video)
-        div.appendChild(h2)
-
-        return [prev, next, close, div]
+        return [...controls, div];
     }
 
-    return { id, photographerId, title, image, video, likes, date, price, getImageCardDOM, getVideoCardDOM, getImageLightBoxDOM, getVideoLightBoxDOM }
+    return { getImageCardDOM, getVideoCardDOM, getImageLightBoxDOM, getVideoLightBoxDOM }
 }

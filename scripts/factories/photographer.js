@@ -1,112 +1,101 @@
 function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
 
-    const picture = `./assets/photographers/${portrait}`;
-    const location = `${city}, ${country}`;
-    const rate = `${price}€/jour`;
+    const IMG_SRC = `./assets/photographers/${portrait}`;
+    const LOCATION = `${city}, ${country}`;
+    const RATE = `${price}€/jour`;
+    const ALT = `Photo de profil de ${name}`;
+    const A_HREF = `./photographer.html?id=${id}`;
+    const A_TITLE = `Lien vers le profil de ${name}`;
+    const P_ARIA_LOCATION = `Localisation : ${LOCATION}`;
+    const P_ARIA_TAGLINE = `Devise : ${tagline}`;
+    const P_ARIA_RATE = `Tarif : ${RATE}`;
+    const BUTTON_ARIA = "Cliquer pour me contacter";
 
     function getUserCardDOM() {
-        //<article class="cards__item card"></article>
         const article = document.createElement( 'article' );
-        article.setAttribute("class", "cards__item card")
-        article.setAttribute("role", "article")
+        article.classList.add("cards__item", "card");
+        article.setAttribute("role", "article");
         
-        //<a href="./photographer.html?id=..." class="card__link" title="Lien vers le profil de Mimi Keel" role="link"></a>
         const a_link = document.createElement( 'a' );
-        a_link.setAttribute("href", "./photographer.html?id=" + id)
-        a_link.setAttribute("class", "card__link")
-        a_link.setAttribute("title", "Lien vers le profil de " + name)
-        a_link.setAttribute("role", "link")
+        a_link.href = A_HREF;
+        a_link.classList.add("card__link");
+        a_link.title = A_TITLE;
+        a_link.setAttribute("role", "link");
 
-        //<img src="./assets/photographers/....jpg" class="card__image" alt="Photo de profil de ..."/>
         const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        img.setAttribute("class", "card__image")
-        img.setAttribute("alt", "Photo de profil de " + name)
-
-        //<h2 class="card__title"></h2>
+        img.src = IMG_SRC;
+        img.alt = ALT;
+        img.classList.add("card__image");
+        
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        h2.setAttribute("class", "card__title")
+        h2.classList.add("card__title");
         
-        //<p class="card__location"></p>
         const p_location = document.createElement( 'p' );
-        p_location.textContent = location;
-        p_location.setAttribute("class", "card__location")
-        p_location.setAttribute("aria-label", "Localisation : " + location)
+        p_location.textContent = LOCATION;
+        p_location.classList.add("card__location");
+        p_location.setAttribute("aria-label", P_ARIA_LOCATION);
 
-        //<p class="card__tagline"></p>
         const p_tagline = document.createElement( 'p' );
         p_tagline.textContent = tagline;
-        p_tagline.setAttribute("class", "card__tagline")
-        p_tagline.setAttribute("aria-label", "Devise : " + tagline)
+        p_tagline.classList.add("card__tagline");
+        p_tagline.setAttribute("aria-label", P_ARIA_TAGLINE);
 
-        //<p class="card__price"></p>
         const p_price = document.createElement( 'p' );
-        p_price.textContent = rate;
-        p_price.setAttribute("class", "card__price")
-        p_price.setAttribute("aria-label", "Tarif : " + rate)
+        p_price.textContent = RATE;
+        p_price.classList.add("card__price");
+        p_price.setAttribute("aria-label", P_ARIA_RATE);
 
-        // Ajout dans <article>
         a_link.appendChild(img);
         a_link.appendChild(h2);
         article.appendChild(a_link);
-        // article.appendChild(img);
-        // article.appendChild(h2);
         article.appendChild(p_location);
         article.appendChild(p_tagline);
         article.appendChild(p_price);
 
-        return (article);
+        return article;
     }
 
     function getUserHeaderDOM() {
-        //<div class="photographer__header"></div>
         const div_header = document.createElement( 'div' );
-        div_header.setAttribute("class", "photographer__header")
+        div_header.classList.add("photographer__header");
         
-        //<h1 class="photographer__title"></h1>
         const h1 = document.createElement( 'h1' );
-        h1.textContent = name
-        h1.setAttribute("class", "photographer__title")
+        h1.textContent = name;
+        h1.classList.add("photographer__title");
 
-        //<p class="photographer__location"></p>
         const p_location = document.createElement( 'p' );
-        p_location.textContent = location;
-        p_location.setAttribute("class", "photographer__location")
+        p_location.textContent = LOCATION;
+        p_location.classList.add("photographer__location");
 
-        //<p class="photographer__tagline"></p>
         const p_tagline = document.createElement( 'p' );
         p_tagline.textContent = tagline;
-        p_tagline.setAttribute("class", "photographer__tagline")
+        p_tagline.classList.add("photographer__tagline");
 
-        //<button class="photographer__contact-button"></button>
         const button = document.createElement( 'button' );
         button.textContent = "Contactez-moi";
-        button.setAttribute("class", "contact_button photographer__button")
-        button.setAttribute("onclick", "displayModal()")
-        button.setAttribute("tabindex", 0)
-        button.setAttribute("aria-label", "Cliquer pour me contacter")
+        button.classList.add("contact_button", "photographer__button");
+        button.onclick = displayModal;
+        button.setAttribute("tabindex", 0);
+        button.setAttribute("aria-label", BUTTON_ARIA);
 
-        //<img src="./assets/photographers/....jpg" class="card__image" alt="Photo de profil de ..."/>
         const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        img.setAttribute("class", "photographer__image card__image")
-        img.setAttribute("alt", "Photo de profil de " + name)
+        img.src = IMG_SRC;
+        img.alt = ALT;
+        img.classList.add("photographer__image", "card__image");
 
-        //<p class="sidebar__rate"></p>
         const p_rate = document.createElement( 'p' );
-        p_rate.textContent = rate;
-        p_rate.setAttribute("class", "sidebar__rate")
-
-        // Ajout dans <article>
+        p_rate.textContent = RATE;
+        p_rate.classList.add("sidebar__rate");
         
         div_header.appendChild(h1);
         div_header.appendChild(p_location);
         div_header.appendChild(p_tagline);
+
         return [div_header, button, img, p_rate];
     }
 
-    return { name, id, city, country, tagline, price, picture, getUserCardDOM, getUserHeaderDOM }
+    return { getUserCardDOM, getUserHeaderDOM }
 }
 
