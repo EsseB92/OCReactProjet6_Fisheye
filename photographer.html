@@ -18,6 +18,14 @@
 
     <main class="main" role="main" aria-label="Contenu pricipale de la page">
       <section class="photographer"></section>
+      <div id="sort">
+        <label for="sort-selection">Trier par</label>
+        <select name="sort-selection" id="sort-selection" onchange="orderMedias()">
+          <option value="popularity" id="popularity">Popularité</option>
+          <option value="date" id="date">Date</option>
+          <option value="title" id="title">Titre</option>
+        </select>
+      </div>
       <section class="medias"></section>
       <section class="sidebar">
         <div class="sidebar__likes">

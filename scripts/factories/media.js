@@ -8,6 +8,7 @@ function mediaFactory(data) {
         //<article class="media"></article>
         const article = document.createElement( 'article' );
         article.setAttribute("class", "media")
+        article.setAttribute("id", id)
 
         //<img class="media__image"></img>
         const img = document.createElement( 'img' );
@@ -43,6 +44,7 @@ function mediaFactory(data) {
         //<i class="fa-solid fa-heart media__heart"></i>
         const i = document.createElement( 'i' );
         i.setAttribute("class", "fa-solid fa-heart media__heart")
+        i.setAttribute("onclick", "addOneLike(" + id + ")")
 
         article.appendChild(img)
         div_title.appendChild(h2)
@@ -58,6 +60,7 @@ function mediaFactory(data) {
         //<article class="media"></article>
         const article = document.createElement( 'article' );
         article.setAttribute("class", "media")
+        article.setAttribute("id", id)
 
         //<video class="media__video"></video>
         const video = document.createElement( 'video' );
@@ -99,6 +102,7 @@ function mediaFactory(data) {
         //<i class="fa-solid fa-heart media__heart"></i>
         const i = document.createElement( 'i' );
         i.setAttribute("class", "fa-solid fa-heart media__heart")
+        i.setAttribute("onclick", "addOneLike(" + id + ")")
 
         //video.appendChild(source)
         article.appendChild(video)

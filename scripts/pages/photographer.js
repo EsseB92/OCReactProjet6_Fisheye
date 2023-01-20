@@ -3,6 +3,9 @@
 let searchParams = new URLSearchParams(location.search);
 let photographerId = searchParams.get('id');
 var p, m;
+var idOfAlreadyAdded = []
+
+/* Async Get */
 
 async function getPhotographer() {
     try {
@@ -28,6 +31,19 @@ async function getMedias() {
     }
 }
 
+/* Get type of media */
+
+function getTypeOfMedia(media) {
+    if(media.image !== undefined){
+        console.log("image")
+        return "image"
+    } else if(media.video !== undefined){
+        console.log("video")
+        return "video"
+    }else return 0
+}
+
+/* Display */
 
 function displayPhotographer(photographer) {
     const photographerSection = document.querySelector(".photographer");
@@ -48,6 +64,7 @@ function displayPhotographer(photographer) {
 function displayMedias(medias) {
     const mediasSection = document.querySelector(".medias");
     const sidebarSection = document.querySelector(".sidebar__like");
+    mediasSection.innerHTML = "";
 
     let countMedia = 0;
     
@@ -69,14 +86,48 @@ function displayMedias(medias) {
     sidebarSection.textContent = countMedia;
 };
 
-function getTypeOfMedia(media) {
-    if(media.image !== undefined){
-        console.log("image")
-        return "image"
-    } else if(media.video !== undefined){
-        console.log("video")
-        return "video"
-    }else return 0
+function addOneLike(id) {
+
+    const article = document.getElementById(id)
+    const like = article.querySelector('.media__like')
+    const allLikes = document.querySelector('.sidebar__like')
+
+    const media = m.find(element => element.id === parseInt(id))
+
+    const test = idOfAlreadyAdded.find(element => element === id)
+
+    if(test === undefined){
+        like.textContent = media.likes + 1
+        allLikes.textContent = parseInt(allLikes.innerText)+1
+
+        idOfAlreadyAdded.push(id)
+    } else {
+        console.log("Vous avez déjà liké !")
+    }
+}
+
+/* Sort */
+
+function orderMedias() {
+    const valueSelected = document.getElementById("sort-selection").value
+    switch (valueSelected) {
+        case 'popularity':
+            m.sort((a, b) => b.likes - a.likes)
+            displayMedias(m)
+        break;
+        case 'date':
+            m.sort((a, b) => new Date(b.date) - new Date(a.date))
+            console.log(m)
+            displayMedias(m)
+        break;
+        case 'title':
+            m.sort((a, b) => ('' + a.title).localeCompare(b.title))
+            console.log(m)
+            displayMedias(m)
+        break;
+        default :
+            m.sort((a, b) => b.likes - a.likes)
+    }
 }
 
 /* Lightbox */
@@ -147,9 +198,6 @@ function prevMedia(id){
     })
 }
 
-
-
-
 /* INIT */
 
 async function init() {
@@ -158,7 +206,8 @@ async function init() {
     //const [photographer, medias] = await getPhotographer();
     //const { medias } = await getMedias();
     console.log(m)
-    displayPhotographer(p); 
+    displayPhotographer(p);
+    orderMedias();
     displayMedias(m);
 };
     
