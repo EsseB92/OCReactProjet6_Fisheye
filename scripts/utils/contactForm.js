@@ -1,16 +1,27 @@
+document.addEventListener('keyup', (event) => {
+    if(event.code === 'Escape') {
+        closeModal()
+    }
+})
+
 function displayModal() {
     const modal = document.getElementById("contact_modal");
+    const main = document.getElementById("main");
 	modal.style.display = "block";
+    modal.setAttribute("aria-hidden", "false")
+    main.setAttribute("aria-hidden", "true")
     const tabIndex = document.querySelectorAll('[tabindex]');
     for(let element of tabIndex) {
         element.setAttribute("tabindex", -1)
     };
-    
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
+    const main = document.getElementById("main");
     modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true")
+    main.setAttribute("aria-hidden", "false")
     const tabIndex = document.querySelectorAll('[tabindex]');
     for(let element of tabIndex) {
         element.setAttribute("tabindex", 0)

@@ -156,11 +156,6 @@ function displayMediaByLightBox(id) {
             lightboxDOM.appendChild(next)
             lightboxDOM.appendChild(close)
             lightboxDOM.appendChild(div)
-
-            const tabIndex = document.querySelectorAll('[tabindex]');
-            for(let element of tabIndex) {
-                element.setAttribute("tabindex", -1)
-            };
         }
     })
 }

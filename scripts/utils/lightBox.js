@@ -14,8 +14,16 @@ document.addEventListener('keyup', (event) => {
 
 function displayLightBox(id) {
     displayMediaByLightBox(id);
-    const lightBox = document.getElementById("lightbox");
+    const lightBox = document.getElementById("lightbox")
+    const main = document.getElementById('main')
 	lightBox.style.display = "block";
+    lightBox.setAttribute("aria-hidden", "false")
+    main.setAttribute("aria-hidden", "true")
+
+    const tabIndex = document.querySelectorAll('[tabindex]');
+    for(let element of tabIndex) {
+        element.setAttribute("tabindex", -1)
+    };
 }
 
 function onKeyUp(event, id) {
@@ -27,13 +35,17 @@ function onKeyUp(event, id) {
 
 function closeLightBox() {
     const lightboxContainer = document.querySelector(".lightbox__container")
-    const lightBox = document.getElementById("lightbox");
+    const lightBox = document.getElementById("lightbox")
+    const main = document.getElementById("main")
 
-	lightBox.style.display = "none";
+	lightBox.style.display = "none"
+    lightBox.setAttribute("aria-hidden", "false")
+    main.setAttribute("aria-hidden", "true")
+
     lightboxContainer.innerHTML = "";
 
-    const tabIndex = document.querySelectorAll('[tabindex]');
+    const tabIndex = document.querySelectorAll('[tabindex]')
     for(let element of tabIndex) {
         element.setAttribute("tabindex", 0)
-    };
+    }       
 }

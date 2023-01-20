@@ -10,17 +10,17 @@
   </head>
 
   <body>
-    <header class="header" role="banner" aria-label="En-tête de la page">
-      <a href="./index.html" class="header__link" title="Lien vers la page d'accueil" role="link" tabindex="0">
+    <header class="header" role="banner" aria-label="En-tête de la page contenant le logo et un lien vers la page d'accueil">
+      <a href="./index.html" class="header__link" aria-label="Lien vers la page d'accueil" role="link" tabindex="0">
         <img src="assets/images/logo.png" alt="Logo de FishEye" class="header__logo" />
       </a>
     </header>
 
-    <main class="main" role="main" aria-label="Contenu pricipale de la page">
+    <main id="main" class="main" role="main" aria-label="Contenu pricipale de la page" aria-hidden="false">
       <section class="photographer"></section>
       <div id="sort">
         <label for="sort-selection">Trier par</label>
-        <select name="sort-selection" id="sort-selection" onchange="orderMedias()">
+        <select name="sort-selection" id="sort-selection" onchange="orderMedias()" aria-label="Sélectionner une option pour trier les médias" tabindex="0">
           <option value="popularity" id="popularity">Popularité</option>
           <option value="date" id="date">Date</option>
           <option value="title" id="title">Titre</option>
@@ -36,36 +36,40 @@
       </section>
     </main>
 
-    <div id="contact_modal">
+    <dialog id="contact_modal" aria-hidden="true" aria-live="assertive">
 			<div class="modal">
 				<header class="modal__header">
           <h2 class="modal__title">Contacter</h2>
-          <img class="modal__close" src="assets/icons/close.svg" alt="Fermer" onclick="closeModal()" />
+          <img class="modal__close" src="assets/icons/close.svg" alt="Fermer" onclick="closeModal()" aria-label="Fermer le formulaire de contact"/>
         </header>
 
 				<form id="form" onsubmit="dataProcess(event)">
 					<div class="form__data data">
 						<label for="firstname" class="data__label">Prénom</label>
-						<input type="text" id="firstname" name="firstname" class="data__input"/>
+						<input type="text" id="firstname" name="firstname" class="data__input" required aria-describedby="firstname-desc"/>
+            <p id="firstname-desc" class="data__desc">Entrez votre prénom</p>
 					</div>
           <div class="data">
 						<label for="lastname" class="data__label">Nom</label>
-						<input type="text" id="lastname" name="lastname" class="data__input"/>
+						<input type="text" id="lastname" name="lastname" class="data__input" required aria-describedby="lastname-desc"/>
+            <p id="firstname-desc" class="data__desc">Entrez votre nom</p>
 					</div>
           <div class="data">
 						<label for="email" class="data__label">@mail</label>
-						<input type="email" id="email" name="email" class="data__input"/>
+						<input type="email" id="email" name="email" class="data__input" required aria-describedby="email-desc"/>
+            <p id="firstname-desc" class="data__desc">Entrez votre adresse email</p>
 					</div>
           <div class="data">
 						<label for="message" class="data__label">Votre message</label>
-						<textarea type="text" id="message" name="message" class="data__input"></textarea>
+						<textarea type="text" id="message" name="message" class="data__input" required aria-describedby="message-desc"></textarea>
+            <p id="firstname-desc" class="data__desc">Entrez votre message</p>
 					</div>
-          <button class="contact_button form__button">Envoyer</button>
+          <button class="contact_button form__button" aria-label="Envoyer le formulaire de contact">Envoyer</button>
 				</form>
 			</div>
-		</div>
+		</dialog>
 
-    <dialog id="lightbox">
+    <dialog id="lightbox" aria-hidden="true" aria-live="assertive">
     </dialog>
 
 

@@ -18,6 +18,8 @@ function mediaFactory(data) {
         img.setAttribute("onclick", "displayLightBox(" + id + ")")
         img.setAttribute("onkeyup", "onKeyUp(event, " + id + ")")
         img.setAttribute("tabindex", "0")
+        img.setAttribute("aria-label", "Cliquer ou appuyer sur Entrée pour voir l'image en plein écran")
+        img.setAttribute("aria-describedby", "description-"+id)
 
         //<footer class="media__footer"></footer>
         const footer = document.createElement( 'footer' );
@@ -31,6 +33,7 @@ function mediaFactory(data) {
         const h2 = document.createElement( 'h2' );
         h2.textContent = title
         h2.setAttribute("class", "media__title")
+        h2.setAttribute("id", "description-"+id)
 
         //<div class="media__likes"></div>
         const div_like = document.createElement( 'div' );
@@ -45,6 +48,8 @@ function mediaFactory(data) {
         const i = document.createElement( 'i' );
         i.setAttribute("class", "fa-solid fa-heart media__heart")
         i.setAttribute("onclick", "addOneLike(" + id + ")")
+        i.setAttribute("aria-label", "Cliquer pour ajouter un like")
+        i.setAttribute("tabIndex", "0")
 
         article.appendChild(img)
         div_title.appendChild(h2)
@@ -70,12 +75,8 @@ function mediaFactory(data) {
         video.setAttribute("onclick", "displayLightBox(" + id + ")")
         video.setAttribute("onkeyup", "onKeyUp(event, " + id + ")")
         video.setAttribute("tabindex", "0")
-
-        // //<source class="media__source"></source>
-        // const source = document.createElement( 'source' );
-        // source.setAttribute("src", movie)
-        // source.setAttribute("type", "video/mp4")
-        // source.setAttribute("class", "media__source")
+        video.setAttribute("aria-label", "Cliquer ou appuyer sur Entrée pour voir la vidéo en plein écran")
+        video.setAttribute("aria-describedby", "description-"+id)
 
         //<footer class="media__footer"></footer>
         const footer = document.createElement( 'footer' );
@@ -89,6 +90,7 @@ function mediaFactory(data) {
         const h2 = document.createElement( 'h2' );
         h2.textContent = title
         h2.setAttribute("class", "media__title")
+        h2.setAttribute("id", "description-"+id)
 
         //<div class="media__likes"></div>
         const div_like = document.createElement( 'div' );
@@ -103,6 +105,8 @@ function mediaFactory(data) {
         const i = document.createElement( 'i' );
         i.setAttribute("class", "fa-solid fa-heart media__heart")
         i.setAttribute("onclick", "addOneLike(" + id + ")")
+        i.setAttribute("aria-label", "Cliquer pour ajouter un like")
+        i.setAttribute("tabIndex", "0")
 
         //video.appendChild(source)
         article.appendChild(video)
@@ -121,18 +125,21 @@ function mediaFactory(data) {
         prev.setAttribute("id", "prev-media")
         prev.setAttribute("class", "fa-sharp fa-solid fa-chevron-left")
         prev.setAttribute("onclick", "prevMedia(" + id + ")")
+        prev.setAttribute("aria-label", "Media précédent")
 
         //<i id="next-media" class="fa-sharp fa-solid fa-chevron-right" onclick="nextMedia(${id})"></i>
         const next = document.createElement( 'i' );
         next.setAttribute("id", "next-media")
         next.setAttribute("class", "fa-sharp fa-solid fa-chevron-right")
         next.setAttribute("onclick", "nextMedia(" + id + ")")
+        next.setAttribute("aria-label", "Media suivant")
 
         //<i id="close-lightbox" class="fa-sharp fa-solid fa-xmark" onclick="closeLightBox()"></i>
         const close = document.createElement( 'i' );
         close.setAttribute("id", "close-lightbox")
         close.setAttribute("class", "fa-sharp fa-solid fa-xmark")
         close.setAttribute("onclick", "closeLightBox()")
+        next.setAttribute("aria-label", "Fermer")
 
         //<div class="lightbox__container"></div>
         const div = document.createElement( 'div' );
@@ -144,11 +151,13 @@ function mediaFactory(data) {
         img.setAttribute("alt", title)
         img.setAttribute("class", "lightbox__image lightbox__media")
         img.setAttribute("id", id)
+        img.setAttribute("aria-describedby", "lightbox-description")
 
         //<h2 class="lightbox__title"></h2>
         const h2 = document.createElement( 'h2' );
         h2.textContent = title
         h2.setAttribute("class", "lightbox__title")
+        h2.setAttribute("id", "lightbox-description")
 
         div.appendChild(img)
         div.appendChild(h2)
@@ -162,18 +171,21 @@ function mediaFactory(data) {
         prev.setAttribute("id", "prev-media")
         prev.setAttribute("class", "fa-sharp fa-solid fa-chevron-left")
         prev.setAttribute("onclick", "prevMedia(" + id + ")")
+        prev.setAttribute("aria-label", "Media précédent")
 
         //<i id="next-media" class="fa-sharp fa-solid fa-chevron-right" onclick="nextMedia(${id})"></i>
         const next = document.createElement( 'i' );
         next.setAttribute("id", "next-media")
         next.setAttribute("class", "fa-sharp fa-solid fa-chevron-right")
         next.setAttribute("onclick", "nextMedia(" + id + ")")
+        next.setAttribute("aria-label", "Media suivant")
 
         //<i id="close-lightbox" class="fa-sharp fa-solid fa-xmark" onclick="closeLightBox()"></i>
         const close = document.createElement( 'i' );
         close.setAttribute("id", "close-lightbox")
         close.setAttribute("class", "fa-sharp fa-solid fa-xmark")
         close.setAttribute("onclick", "closeLightBox()")
+        next.setAttribute("aria-label", "Fermer")
 
         //<div class="lightbox__container"></div>
         const div = document.createElement( 'div' );
@@ -184,6 +196,7 @@ function mediaFactory(data) {
         video.setAttribute("controls", "")
         video.setAttribute("class", "lightbox__video lightbox__media")
         video.setAttribute("id", id)
+        video.setAttribute("aria-describedby", "lightbox-description")
 
         //<source class="media__source"></source>
         const source = document.createElement( 'source' );
@@ -196,6 +209,8 @@ function mediaFactory(data) {
         const h2 = document.createElement( 'h2' );
         h2.textContent = title
         h2.setAttribute("class", "lightbox__title")
+        h2.setAttribute("id", "lightbox-description")
+
 
         video.appendChild(source)
         div.appendChild(video)
