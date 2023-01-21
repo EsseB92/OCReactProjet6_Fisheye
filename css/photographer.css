@@ -16,11 +16,23 @@
         grid-template-columns: 1fr;
         height: auto;
         padding: 20px;
-        gap: 15px;        
+        gap: 15px;
+        text-align: center;
     }
     .photographer__image {
         grid-row-start: 1;
     }
+
+    #sort {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
 }
 
 .photographer__header {
@@ -70,6 +82,10 @@
     margin: 20px 100px;
     font-size: 18px;
     font-weight: 700;
+}
+
+#sort > label {
+    padding-right: 10px;
 }
 
 #sort-selection {

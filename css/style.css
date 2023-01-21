@@ -70,19 +70,19 @@ body {
 
 .card__location {
     color: #901C1C;
-    font-size: 13px;
+    font-size: 18px;
     margin: 0 0 3px 0;
 }
 
 .card__tagline {
     color: #000000;
-    font-size: 10px;
+    font-size: 15px;
     margin: 0 0 3px 0;
 }
 
 .card__price {
     color: #757575;
-    font-size: 9px;
+    font-size: 15px;
     margin: 0;
 }
 
