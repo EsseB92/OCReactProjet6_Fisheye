@@ -32,6 +32,11 @@ function mediaFactory(data) {
         i.onclick = () => addOneLike(id);
         i.setAttribute("aria-label", I_ARIA_LIKE);
         i.tabIndex = 0;
+        i.onkeyup = (event) => {
+            if(event.code === 'Enter') {
+                addOneLike(id);
+            }
+        }
 
         div_title.appendChild(h2);
         div_like.appendChild(p);
