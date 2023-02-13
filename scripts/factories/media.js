@@ -56,9 +56,9 @@ function mediaFactory(data) {
         img.classList.add("media__image", "media__media");
         img.onclick = () => displayLightBox(id);
         img.onkeyup = event => onKeyUp(event, id);
-        img.tabindex = 0;
         img.setAttribute("aria-label", IMG_ARIA);
         img.setAttribute("aria-describedby", IMG_ARIA_DESC);
+        img.tabIndex = 0;
 
         article.appendChild(img);
         article.appendChild(footer);
@@ -78,7 +78,7 @@ function mediaFactory(data) {
         video.classList.add("media__video", "media__media");
         video.onclick = () => displayLightBox(id);
         video.onkeyup = event => onKeyUp(event, id);
-        video.tabindex = 0;
+        video.tabIndex = 0;
         video.setAttribute("aria-label", MOVIE_ARIA);
         video.setAttribute("aria-describedby", IMG_ARIA_DESC);
 
